@@ -19,6 +19,10 @@ public class Task {
   public Task() {
   }
 
+  public Task(String text) {
+    this.text = text;
+  }
+
   public Task(String text, boolean isDone, boolean isUrgent, Assignee assignee) {
     this.text = text;
     this.isDone = isDone;
