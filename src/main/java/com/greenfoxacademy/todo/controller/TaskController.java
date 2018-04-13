@@ -1,6 +1,8 @@
 package com.greenfoxacademy.todo.controller;
 
 import com.greenfoxacademy.todo.model.Task;
+import com.greenfoxacademy.todo.service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,29 +12,27 @@ import java.util.List;
 @RequestMapping("task/")
 public class TaskController {
 
+  @Autowired
+  TaskService taskService;
+
   @GetMapping("/")
-  public List<Task> getAllTasks() {
-    return new ArrayList<>();
+  public Iterable<Task> getAllTasks() {
+    return taskService.getAllTasks();
   }
 
   @PostMapping("/")
-  public boolean addNewTask(@RequestParam("updatedTask") Task task) {
-    return false;
+  public boolean addOrUpdateNewTask(@RequestParam("task") Task task) {
+    return taskService.updateTask(task);
   }
 
   @GetMapping("{id}")
-  public Task getTaskById(@PathVariable("id") long id) {
-    return new Task();
+  public Task getTaskById(@PathVariable("id") Long id) {
+    return taskService.getTaskById(id);
   }
 
   @DeleteMapping("{id}")
-  public boolean deleteTaskById(@PathVariable("id") long id) {
-    return false;
-  }
-
-  @PostMapping("{id}")
-  public boolean updateTaskById(@PathVariable("id") long id, @RequestParam("updatedTask") Task task) {
-    return false;
+  public boolean deleteTaskById(@PathVariable("id") Long id) {
+    return taskService.deleteTaskById(id);
   }
 
 
