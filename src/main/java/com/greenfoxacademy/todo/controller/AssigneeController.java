@@ -2,6 +2,8 @@ package com.greenfoxacademy.todo.controller;
 
 import com.greenfoxacademy.todo.model.Assignee;
 import com.greenfoxacademy.todo.model.Task;
+import com.greenfoxacademy.todo.service.AssigneeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,28 +13,27 @@ import java.util.List;
 @RequestMapping("/assignee/")
 public class AssigneeController {
 
+  @Autowired
+  AssigneeService assigneeService;
+
   @GetMapping("/")
-  public List<Assignee> getAllAssignees() {
-    return new ArrayList<>();
+  public Iterable<Assignee> getAllAssignees() {
+    return assigneeService.getAllAssigness();
   }
 
   @PostMapping("/")
-  public boolean addNewAssignee(@RequestParam("updatedAssignee") Assignee assignee) {
-    return false;
+  public boolean addAssignee(@RequestParam("updatedAssignee") Assignee assignee) {
+    assigneeService.addOrUpdateAssignee(assignee);
+    return true;
   }
 
   @GetMapping("{id}")
-  public Task getAssigneeById(@PathVariable("id") long id) {
-    return new Task();
+  public Assignee getAssigneeById(@PathVariable("id") Long id) {
+    return assigneeService.getAssigneeById(id);
   }
 
   @DeleteMapping("{id}")
-  public boolean deleteAssigneeById(@PathVariable("id") long id) {
-    return false;
-  }
-
-  @PostMapping("{id}")
-  public boolean updateAssigneeById(@PathVariable("id") long id, @RequestParam("updatedAssignee") Assignee assignee) {
-    return false;
+  public boolean deleteAssigneeById(@PathVariable("id") Long id) {
+    return assigneeService.deleteAssigneeById(id);
   }
 }

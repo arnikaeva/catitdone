@@ -5,9 +5,6 @@ import com.greenfoxacademy.todo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @RequestMapping("/task/")
 public class TaskController {
@@ -21,8 +18,8 @@ public class TaskController {
   }
 
   @PostMapping("/")
-  public boolean addOrUpdateNewTask(@RequestParam("task") Task task) {
-    return taskService.updateTask(task);
+  public boolean addOrUpdateTask(@RequestParam("task") Task task) {
+    return taskService.addOrUpdateTask(task);
   }
 
   @GetMapping("{id}")

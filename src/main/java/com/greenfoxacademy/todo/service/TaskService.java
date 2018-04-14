@@ -19,7 +19,7 @@ public class TaskService {
     return taskRepository.findAll();
   }
 
-  public boolean updateTask(Task task) {
+  public boolean addOrUpdateTask(Task task) {
     taskRepository.save(task);
     return true;
   }
