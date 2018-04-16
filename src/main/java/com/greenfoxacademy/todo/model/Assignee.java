@@ -1,9 +1,10 @@
 package com.greenfoxacademy.todo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Assignee {
@@ -14,11 +15,21 @@ public class Assignee {
   String name;
   String email;
 
+
+  @OneToMany
+  @JsonManagedReference
+  private List<Task> tasks;
+
   public Assignee() { }
 
   public Assignee(String name, String email) {
     this.name = name;
     this.email = email;
+    this.tasks = new ArrayList<>();
+  }
+
+  public void addTask(Task task) {
+    tasks.add(task);
   }
 
   public long getId() {
@@ -43,5 +54,13 @@ public class Assignee {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public List<Task> getTasks() {
+    return tasks;
+  }
+
+  public void setTasks(List<Task> tasks) {
+    this.tasks = tasks;
   }
 }

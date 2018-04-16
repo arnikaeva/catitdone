@@ -1,5 +1,7 @@
 package com.greenfoxacademy.todo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class Task {
   private long id;
 
   @ManyToOne
+  @JsonBackReference
   private Assignee assignee;
 
   private String text;

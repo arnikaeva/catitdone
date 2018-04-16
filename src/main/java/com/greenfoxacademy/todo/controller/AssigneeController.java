@@ -22,7 +22,7 @@ public class AssigneeController {
   }
 
   @PostMapping("/")
-  public boolean addAssignee(@RequestParam("updatedAssignee") Assignee assignee) {
+  public boolean addAssignee(@RequestBody Assignee assignee) {
     assigneeService.addOrUpdateAssignee(assignee);
     return true;
   }
@@ -35,5 +35,10 @@ public class AssigneeController {
   @DeleteMapping("{id}")
   public boolean deleteAssigneeById(@PathVariable("id") Long id) {
     return assigneeService.deleteAssigneeById(id);
+  }
+
+  @PostMapping("{assigneeId}/task")
+  public boolean addNewTaskToAssigne(@PathVariable("assigneeId") Long assigneeId, @RequestBody Task task) {
+    return assigneeService.addNewTaskToAssigne(assigneeId, task);
   }
 }

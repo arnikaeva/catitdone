@@ -18,7 +18,7 @@ public class TaskController {
   }
 
   @PostMapping("/")
-  public boolean addOrUpdateTask(@RequestParam("task") Task task) {
+  public boolean addOrUpdateTask(@RequestBody Task task) {
     return taskService.addOrUpdateTask(task);
   }
 
